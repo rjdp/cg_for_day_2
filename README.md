@@ -5,7 +5,7 @@
 ## What is a Day 2 operations?
 
 
-What are Day 2 operations? Imagine you're moving into a house. If Day 1 operations are moving into the house (installation), Day 2 operations are the "housekeeping" stage of a software's life cycle. The care and feeding of the software, maintaining the overall stability and health of your software in production.
+ Imagine you're moving into a house. If Day 1 operations are moving into the house (installation), Day 2 operations are the "housekeeping" stage of a software's life cycle. The care and feeding of the software, maintaining the overall stability and health of your software in production.
 
 
 ## Problems Getting to Day 2
