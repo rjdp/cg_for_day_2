@@ -26,3 +26,9 @@ type "yes" on Do you want to perform these actions in workspace
 eks module
 
 add iam user and put the userarn in map_users.userarn  to access cluster by adding it to systems:master group of k8s cluster,  can do this for a role but we will not do it here (check commented section map_users)
+
+
+brew install awscli kubectl
+
+aws configure # use kubeadmin keys
+aws eks --region us-east-1 update-kubeconfig --name production
