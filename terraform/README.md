@@ -32,3 +32,8 @@ brew install awscli kubectl
 
 aws configure # use kubeadmin keys
 aws eks --region us-east-1 update-kubeconfig --name production
+
+For pod autoscaling to work (HPA)
+----------------------------------
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.1/components.yaml
