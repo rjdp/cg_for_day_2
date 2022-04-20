@@ -100,7 +100,7 @@ module "eks" {
     ng1 = {
       version          = "1.22"
       disk_size        = 30
-      desired_capacity = 2
+      desired_capacity = 1
       max_capacity     = 6
       min_capacity     = 1
       instance_types   = ["m5.large"]
