@@ -103,7 +103,7 @@ module "eks" {
       desired_capacity = 2
       max_capacity     = 6
       min_capacity     = 1
-      instance_types   = ["t3.large"]
+      instance_types   = ["m5.large"]
       additional_tags  = local.tags
       k8s_labels       = {}
     }

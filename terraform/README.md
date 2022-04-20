@@ -19,6 +19,7 @@ terraform apply
 type "yes" on Do you want to perform these actions in workspace
 
 Why are we using terraform cloud?
+- tracking infra changes
 - terraform state is best stored at central place instead of someone's local computer
 - the `apply` actually happens on terraform cloud and incase of local internet stability issues , longer task will continue to progress
 
