@@ -47,12 +47,38 @@ For pod autoscaling to work (HPA)
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.1/components.yaml
 
 
-
-
 helm repo add kedacore https://kedacore.github.io/charts
 helm install keda kedacore/keda --namespace keda  --create-namespace
 
 
-helm upgrade --install ingress-nginx ingress-nginx \
-  --repo https://kubernetes.github.io/ingress-nginx \
-  --namespace ingress-nginx --create-namespace
+Check status of Letsencrypt tls fetch
+
+kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges -A
+
+
+
+Order of Install 
+=================
+
+kubernetes-ops-production-10-vpc
+kubernetes-ops-production-20-eks
+kubernetes-ops-production-5-route53-hostedzone
+kubernetes-ops-production-25-eks-cluster-autoscaler
+kubernetes-ops-production-helm-cert-manager
+kubernetes-ops-production-helm-ingress-nginx
+kubernetes-ops-production-helm-external-dns
+kubernetes-ops-production-helm-kube-prometheus-stack
+kubernetes-ops-production-helm-grafana-loki-stack
+
+Order of destroy (reverse of install order)
+================
+
+kubernetes-ops-production-helm-grafana-loki-stack
+kubernetes-ops-production-helm-kube-prometheus-stack
+kubernetes-ops-production-helm-external-dns
+kubernetes-ops-production-helm-ingress-nginx
+kubernetes-ops-production-helm-cert-manager
+kubernetes-ops-production-25-eks-cluster-autoscaler
+kubernetes-ops-production-5-route53-hostedzone
+kubernetes-ops-production-20-eks
+kubernetes-ops-production-10-vpc

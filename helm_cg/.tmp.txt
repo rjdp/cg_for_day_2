@@ -1,0 +1,6 @@
+initdb postgres https://stackoverflow.com/questions/55499984/postgresql-in-helm-initdbscripts-parameter
+
+Install or Upgrade a Release with One Command
+
+
+$ helm upgrade --install <release name> --values <values file> <chart directory>
