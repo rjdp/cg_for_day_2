@@ -134,7 +134,7 @@ module "cert-manager" {
   # This is what you want to name the chart when deploying
   user_chart_name = "cert-manager"
   # The helm chart version you want to use
-  helm_version = "v1.3.1"
+  helm_version = "v1.8.0"
   # The namespace you want to install the chart into - it will create the namespace if it doesnt exist
   namespace = "cert-manager"
   # The helm chart values file
