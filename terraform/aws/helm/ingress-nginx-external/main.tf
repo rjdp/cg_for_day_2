@@ -85,7 +85,7 @@ module "ingress-nginx-external" {
   # This is what you want to name the chart when deploying
   user_chart_name = "ingress-nginx"
   # The helm chart version you want to use
-  helm_version = "3.30.0"
+  helm_version = "4.0.19"
   # The namespace you want to install the chart into - it will create the namespace if it doesnt exist
   namespace = local.namespace
   # The helm chart values file

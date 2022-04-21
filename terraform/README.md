@@ -48,7 +48,11 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/down
 
 
 
-kubectl create namespace keda
 
 helm repo add kedacore https://kedacore.github.io/charts
-helm install keda kedacore/keda --namespace keda
+helm install keda kedacore/keda --namespace keda  --create-namespace
+
+
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
