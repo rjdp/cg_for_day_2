@@ -88,8 +88,7 @@ module "external-dns" {
   eks_cluster_oidc_issuer_url = data.terraform_remote_state.eks.outputs.cluster_oidc_issuer_url
   route53_hosted_zones        = data.terraform_remote_state.route53_hosted_zone.outputs.zone_id
   helm_values_2               = file("${path.module}/values.yaml")
-  helm_version                = "1.9.0"
-
+  
   depends_on = [
     data.terraform_remote_state.eks
   ]
