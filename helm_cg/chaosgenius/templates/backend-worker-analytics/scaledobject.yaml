@@ -1,0 +1,23 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "chaosgenius.fullname" . }}-worker-analytics-scaler
+  labels:
+    deploymentName: {{ include "chaosgenius.fullname" . }}-worker-analytics
+spec:
+  scaleTargetRef:
+    name: {{ include "chaosgenius.fullname" . }}-worker-analytics
+  pollingInterval: 5
+  cooldownPeriod: 120 # 2 min
+  idleReplicaCount: 0 # when after polling redis list is found empty replica will be set to this count
+  minReplicaCount: 1 # min replicas to scale up to when first trigger (appearance of a msg on redis list) occurs , also the number to scale down to when under thresold and not idle, idle means 0 msg 
+  maxReplicaCount: 30 # max replicas will scale up to
+  triggers:
+    - type: redis
+      metadata:
+        listName: anomaly-rca
+        listLength: "10"
+        databaseIndex: "1"
+        address: chaosgenius-redis-master:6379
+        # addressFromEnv: REDIS_ADDRESS
+

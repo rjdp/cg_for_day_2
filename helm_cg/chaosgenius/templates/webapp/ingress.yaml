@@ -1,0 +1,77 @@
+{{- if and .Values.webapp.ingress.enabled }}
+{{- $pathType := .Values.webapp.ingress.pathType | default "ImplementationSpecific" }}
+{{- $serviceName := printf "%s-%s" (include "chaosgenius.fullname" .) "webapp" }}
+{{- $servicePort := .Values.webapp.service.port -}}
+{{- $routePrefix := list .Values.webapp.routePrefix }}
+{{- $paths := .Values.webapp.ingress.paths | default $routePrefix -}}
+{{- $apiIsStable := eq "true" "true" -}}
+{{- $ingressSupportsPathType := eq "true" "true" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $serviceName }}
+  namespace: {{ template "chaosgenius.namespace" . }}
+{{- if .Values.webapp.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.webapp.ingress.annotations | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "chaosgenius.name" . }}-backend
+{{- if .Values.webapp.ingress.labels }}
+{{ toYaml .Values.webapp.ingress.labels | indent 4 }}
+{{- end }}
+{{ include "chaosgenius.labels" . | indent 4 }}
+spec:
+  {{- if $apiIsStable }}
+  {{- if .Values.webapp.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- end }}
+  {{- end }}
+  rules:
+  {{- if .Values.webapp.ingress.hosts }}
+  {{- range $host := .Values.webapp.ingress.hosts }}
+    - host: {{ tpl $host $ }}
+      http:
+        paths:
+  {{- range $p := $paths }}
+          - path: {{ tpl $p $ }}
+            {{- if and $pathType $ingressSupportsPathType }}
+            pathType: {{ $pathType }}
+            {{- end }}
+            backend:
+              {{- if $apiIsStable }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+    {{- end }}
+    {{- end -}}
+  {{- end -}}
+  {{- else }}
+    - http:
+        paths:
+  {{- range $p := $paths }}
+          - path: {{ tpl $p $ }}
+            {{- if and $pathType $ingressSupportsPathType }}
+            pathType: {{ $pathType }}
+            {{- end }}
+            backend:
+              {{- if $apiIsStable }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
+  {{- end -}}
+  {{- end -}}
+  {{- if .Values.webapp.ingress.tls }}
+  tls:
+{{ tpl (toYaml .Values.webapp.ingress.tls | indent 4) . }}
+  {{- end -}}
+{{- end -}}

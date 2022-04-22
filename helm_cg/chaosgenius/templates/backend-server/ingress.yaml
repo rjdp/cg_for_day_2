@@ -1,0 +1,77 @@
+{{- if and .Values.backend.server.ingress.enabled }}
+{{- $pathType := .Values.backend.server.ingress.pathType | default "ImplementationSpecific" }}
+{{- $serviceName := printf "%s-%s" (include "chaosgenius.fullname" .) "server" }}
+{{- $servicePort := .Values.backend.server.service.port -}}
+{{- $routePrefix := list .Values.backend.server.routePrefix }}
+{{- $paths := .Values.backend.server.ingress.paths | default $routePrefix -}}
+{{- $apiIsStable := eq "true" "true" -}}
+{{- $ingressSupportsPathType := eq "true" "true" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $serviceName }}
+  namespace: {{ template "chaosgenius.namespace" . }}
+{{- if .Values.backend.server.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.backend.server.ingress.annotations | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "chaosgenius.name" . }}-backend
+{{- if .Values.backend.server.ingress.labels }}
+{{ toYaml .Values.backend.server.ingress.labels | indent 4 }}
+{{- end }}
+{{ include "chaosgenius.labels" . | indent 4 }}
+spec:
+  {{- if $apiIsStable }}
+  {{- if .Values.backend.server.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.backend.ingress.ingressClassName }}
+  {{- end }}
+  {{- end }}
+  rules:
+  {{- if .Values.backend.server.ingress.hosts }}
+  {{- range $host := .Values.backend.server.ingress.hosts }}
+    - host: {{ tpl $host $ }}
+      http:
+        paths:
+  {{- range $p := $paths }}
+          - path: {{ tpl $p $ }}
+            {{- if and $pathType $ingressSupportsPathType }}
+            pathType: {{ $pathType }}
+            {{- end }}
+            backend:
+              {{- if $apiIsStable }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+    {{- end }}
+    {{- end -}}
+  {{- end -}}
+  {{- else }}
+    - http:
+        paths:
+  {{- range $p := $paths }}
+          - path: {{ tpl $p $ }}
+            {{- if and $pathType $ingressSupportsPathType }}
+            pathType: {{ $pathType }}
+            {{- end }}
+            backend:
+              {{- if $apiIsStable }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
+  {{- end -}}
+  {{- end -}}
+  {{- if .Values.backend.server.ingress.tls }}
+  tls:
+{{ tpl (toYaml .Values.backend.server.ingress.tls | indent 4) . }}
+  {{- end -}}
+{{- end -}}
