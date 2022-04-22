@@ -62,7 +62,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 
+{{- define "chaosgenius.labelsAnalytics" -}}
+helm.sh/chart: {{ include "chaosgenius.chart" . }}
+{{ include "chaosgenius.selectorLabelsAnalytics" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 
+
+{{- define "chaosgenius.labelsAlerts" -}}
+helm.sh/chart: {{ include "chaosgenius.chart" . }}
+{{ include "chaosgenius.selectorLabelsAlerts" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+
+{{- define "chaosgenius.labelsScheduler" -}}
+helm.sh/chart: {{ include "chaosgenius.chart" . }}
+{{ include "chaosgenius.selectorLabelsScheduler" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 
 {{/*
 Selector labels

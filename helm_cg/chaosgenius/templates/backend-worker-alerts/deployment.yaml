@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: {{ include "chaosgenius.fullname" . }}-worker-alerts
   labels:
-    {{- include "chaosgenius.labelsAlert" . | nindent 4 }}
+    {{- include "chaosgenius.labelsAlerts" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "chaosgenius.selectorLabels" . | nindent 6 }}
+      {{- include "chaosgenius.selectorLabelsAlerts" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "chaosgenius.selectorLabels" . | nindent 8 }}
+        {{- include "chaosgenius.selectorLabelsAlerts" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
