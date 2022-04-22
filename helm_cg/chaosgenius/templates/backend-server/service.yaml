@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "chaosgenius.fullname" . }}
+  name: {{ include "chaosgenius.fullname" . }}-server
   labels:
     {{- include "chaosgenius.labelsServer" . | nindent 4 }}
 spec:

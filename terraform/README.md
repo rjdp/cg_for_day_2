@@ -48,7 +48,11 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/down
 
 
 helm repo add kedacore https://kedacore.github.io/charts
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install keda kedacore/keda --namespace keda  --create-namespace
+helm install redis bitnami/redis --set fullnameOverride=chaosgenius-redis,architecture=standalone,auth.enabled=false --version "~16.8.7"
+<!-- helm install postgres bitnami/postgresql --set fullnameOverride=chaosgenius-db --version "~11.1.21" -->
+
 
 
 Check status of Letsencrypt tls fetch

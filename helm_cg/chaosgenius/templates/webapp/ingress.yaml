@@ -16,7 +16,7 @@ metadata:
 {{ toYaml .Values.webapp.ingress.annotations | indent 4 }}
 {{- end }}
   labels:
-    app: {{ template "chaosgenius.name" . }}-backend
+    app: {{ template "chaosgenius.name" . }}-webapp
 {{- if .Values.webapp.ingress.labels }}
 {{ toYaml .Values.webapp.ingress.labels | indent 4 }}
 {{- end }}

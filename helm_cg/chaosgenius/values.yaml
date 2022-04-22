@@ -73,11 +73,11 @@ webapp:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 1.5Gi
+      cpu: 300m
+      memory: 512Mi
     requests:
-      cpu: 200m
-      memory: 1Gi
+      cpu: 100m
+      memory: 192Mi
 
 
 backend:
