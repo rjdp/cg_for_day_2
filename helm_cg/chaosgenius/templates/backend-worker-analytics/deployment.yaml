@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "chaosgenius.fullname" . }}-worker-analytics
   labels:
-    {{- include "chaosgenius.labels" . | nindent 4 }}
+    {{- include "chaosgenius.labelsAnalytics" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

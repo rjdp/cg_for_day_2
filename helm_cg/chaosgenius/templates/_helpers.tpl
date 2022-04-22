@@ -83,6 +83,22 @@ app.kubernetes.io/name: {{ include "chaosgenius.name" . }}-webapp
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{- define "chaosgenius.selectorLabelsScheduler" -}}
+app.kubernetes.io/name: {{ include "chaosgenius.name" . }}-scheduler
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{- define "chaosgenius.selectorLabelsAnalytics" -}}
+app.kubernetes.io/name: {{ include "chaosgenius.name" . }}-analytics
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+
+{{- define "chaosgenius.selectorLabelsAlerts" -}}
+app.kubernetes.io/name: {{ include "chaosgenius.name" . }}-alerts
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
 {{/*
 Create the name of the service account to use
 */}}

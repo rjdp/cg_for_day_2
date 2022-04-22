@@ -279,6 +279,13 @@ scheduler_envs:
   WORKER_ENVIRONMENT: docker
   WORKSPACE_DOCKER_MOUNT: airbyte_workspace
   WORKSPACE_ROOT: /tmp/workspace
+  DB_HOST: chaosgenius-db
+  DB_USERNAME: postgres
+  DB_PASSWORD: chaosgenius
+  DB_PORT: "5432"
+  META_DATABASE: chaosgenius
+  DATA_DATABASE: chaosgenius_data
+  DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
 
 
 worker_analytics_envs:
@@ -360,6 +367,13 @@ worker_analytics_envs:
   WORKER_ENVIRONMENT: docker
   WORKSPACE_DOCKER_MOUNT: airbyte_workspace
   WORKSPACE_ROOT: /tmp/workspace
+  DB_HOST: chaosgenius-db
+  DB_USERNAME: postgres
+  DB_PASSWORD: chaosgenius
+  DB_PORT: "5432"
+  META_DATABASE: chaosgenius
+  DATA_DATABASE: chaosgenius_data
+  DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
 
 worker_alerts_envs:
   API_URL: /api/v1/
@@ -440,6 +454,13 @@ worker_alerts_envs:
   WORKER_ENVIRONMENT: docker
   WORKSPACE_DOCKER_MOUNT: airbyte_workspace
   WORKSPACE_ROOT: /tmp/workspace
+  DB_HOST: chaosgenius-db
+  DB_USERNAME: postgres
+  DB_PASSWORD: chaosgenius
+  DB_PORT: "5432"
+  META_DATABASE: chaosgenius
+  DATA_DATABASE: chaosgenius_data
+  DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
 
 
 # redis:
