@@ -16,7 +16,7 @@ spec:
     - type: redis
       metadata:
         listName: alerts
-        listLength: "10"
+        listLength: "6"
         databaseIndex: "1"
         address: {{ .Values.redis_svc_name }}.default:6379
         # addressFromEnv: REDIS_ADDRESS
