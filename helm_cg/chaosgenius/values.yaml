@@ -233,6 +233,8 @@ scheduler_envs:
   CONFIG_DATABASE_USER: ""
   CONFIG_ROOT: /data
   DATA_DOCKER_MOUNT: airbyte_data
+  CELERY_BROKER_URL: redis://chaosgenius-redis-master:6379/1
+  CELERY_RESULT_BACKEND: redis://chaosgenius-redis-master:6379/1
   DATABASE_DB: airbyte
   DATABASE_HOST: db
   DATABASE_PASSWORD: docker
