@@ -2,5 +2,11 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 11.1.23
-digest: sha256:101696c8eacdf67061415945ce9733ae708853bc432008aac871bf4c330e4981
-generated: "2022-04-22T20:09:28.361158+05:30"
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.8.7
+- name: keda
+  repository: https://kedacore.github.io/charts
+  version: 2.6.2
+digest: sha256:dd7296d0e2822cd4bc8a907695decb832c26d48b9be535e5f369947debeb236a
+generated: "2022-04-23T08:27:01.538343+05:30"

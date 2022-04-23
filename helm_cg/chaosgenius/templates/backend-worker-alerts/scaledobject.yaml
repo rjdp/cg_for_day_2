@@ -18,6 +18,6 @@ spec:
         listName: alerts
         listLength: "10"
         databaseIndex: "1"
-        address: chaosgenius-redis-headless.default:6379
+        address: {{ .Values.redis_svc_name }}.default:6379
         # addressFromEnv: REDIS_ADDRESS
 

@@ -464,14 +464,20 @@ worker_alerts_envs:
   DATA_DATABASE: chaosgenius_data
   DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
 
+redis_svc_name: chaosgenius-redis-master
 
-# redis:
-#   fullnameOverride: chaosgenius-redis
-#   architecture: standalone
-#   auth:
-#     enabled: false	
+redis:
+  enabled: true
+  fullnameOverride: chaosgenius-redis
+  architecture: standalone
+  auth:
+    enabled: false
+
+keda:
+  enabled: true
 
 postgresql:
+  enabled: true
   fullnameOverride: chaosgenius-db
   primary:
     initdb:
