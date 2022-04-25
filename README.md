@@ -31,4 +31,4 @@
 - [ ] Exploration of other trigger strategy for scaling workers, currently we scale if #tasks waiting in queue beyond a certain number for more than a certain duration
 - [ ] Cluster autoscaler take a minute or 2 to add more nodes incase current worker nodes are occupied and there are dd/anomaly workers pending to be scheduled, we can look into Karpenter (https://karpenter.sh/, https://towardsdev.com/karpenter-vs-cluster-autoscaler-dd877b91629b) this is pretty new and was released few months back
 - [ ] setting up appropriate Pod resource limits for better utilisation
-
+- [ ] currently if persistent volume binds to addtional nodes the cluster doesnot scale down back to 0 ( this should be a fairly simple fix )
