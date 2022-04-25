@@ -9,7 +9,7 @@ spec:
     name: {{ include "chaosgenius.fullname" . }}-worker-analytics
   pollingInterval: 5
   cooldownPeriod: 120 # 2 min
-  idleReplicaCount: 0 # when after polling redis list is found empty replica will be set to this count
+  idleReplicaCount: 1 # when after polling redis list is found empty replica will be set to this count
   minReplicaCount: 1 # min replicas to scale up to when first trigger (appearance of a msg on redis list) occurs , also the number to scale down to when under thresold and not idle, idle means 0 msg 
   maxReplicaCount: 30 # max replicas will scale up to
   triggers:

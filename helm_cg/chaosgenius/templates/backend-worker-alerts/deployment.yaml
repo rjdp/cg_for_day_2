@@ -28,24 +28,35 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-worker-alerts
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c" ,"while [ -f /tmp/.current ] && [ `cat /tmp/.current` != '0' ]; do sleep 5; done"]
           command:
             - "sh"
             - "-c"
-            - "celery -A run.celery worker --loglevel=INFO --concurrency=2 -P processes -Q alerts"
+            - "python3 scripts-dir/patch_celery_task.py && celery -A run.celery worker --loglevel=INFO --concurrency=2 -P processes -Q alerts"
           envFrom:
             - configMapRef:
                 name: {{ include "chaosgenius.fullname" . }}-worker-alerts
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           resources:
             {{- toYaml .Values.backend.worker_alerts.resources | nindent 12 }}
+          volumeMounts:
+          - name: scripts-vol
+            mountPath: /usr/src/app/scripts-dir
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: scripts-vol
+        configMap:
+          name: scripts-configmap
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}

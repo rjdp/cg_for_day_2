@@ -220,6 +220,7 @@ server_envs:
   REACT_APP_EVENT_ALERT: "false"
   SENTRY_DSN: ""
   CHAOSGENIUS_ENTERPRISE_EDITION_KEY: ""
+  HOURS_OFFSET_FOR_ANALTYICS: 0
 
 scheduler_envs:
   CHAOSGENIUS_WEBAPP_URL: https://app.k8s.chaosgenius.io
@@ -288,6 +289,8 @@ scheduler_envs:
   META_DATABASE: chaosgenius
   DATA_DATABASE: chaosgenius_data
   DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
+  HOURS_OFFSET_FOR_ANALTYICS: 0
+  METADATA_SYNC_TIME: 03:00
 
 
 worker_analytics_envs:
@@ -376,6 +379,7 @@ worker_analytics_envs:
   META_DATABASE: chaosgenius
   DATA_DATABASE: chaosgenius_data
   DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
+  HOURS_OFFSET_FOR_ANALTYICS: 0
 
 worker_alerts_envs:
   API_URL: /api/v1/
@@ -463,6 +467,7 @@ worker_alerts_envs:
   META_DATABASE: chaosgenius
   DATA_DATABASE: chaosgenius_data
   DATABASE_URL_CG_DB: postgresql+psycopg2://postgres:chaosgenius@chaosgenius-db/chaosgenius
+  HOURS_OFFSET_FOR_ANALTYICS: 0
 
 redis_svc_name: chaosgenius-redis-master
 
