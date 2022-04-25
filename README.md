@@ -17,11 +17,11 @@
 - [X] Observability with Grafana: resource utilization and log aggregation for running pods using https://grafana.k8s.chaosgenius.io/
 
 
-# Bringng up Infra could look
+# Bringng up Infra 
 - [X] storing cloud provider acc credentials to environment variable
 - [X] `terraform apply` # Infrastructure as code(IaC) 
 
-# Installing or Upgrading application could look like 
+# Installing or Upgrading application
 
 - [X] `helm  upgrade --install my-chaosgenius chaosgenius --version=0.6.0` # Installs 0.6.0 version of `chaogenius` if not already installed else upgrades the existing installation(a.k.a "release" in Helm terminology)  named "my-chaosgenius".
 
