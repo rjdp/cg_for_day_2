@@ -11,7 +11,7 @@
 ## Problems Getting to Day 2 (All tackled)
 
 - [X] Bringing up Production grade infra
-- [X] [Easy path to Install/Upgrade](#installing-or-upgrading-application-could-look-like) ( https://app.k8s.chaosgenius.io )
+- [X] [Easy path to Install/Upgrade](#installing-or-upgrading-application) ( https://app.k8s.chaosgenius.io )
 - [X] Autoscaling for anomaly/DD workers, will add more workers incase there are wating anomaly/dd tasks in queue (POC here : https://github.com/chaos-genius/celery-worker-autoscale )
 - [X] Autoscaling k8s cluster by adding more ec2 instance, if current servers are fully occupied and cannot accomodate workers required for picking up pending tasks 
 - [X] Observability with Grafana: resource utilization and log aggregation for running pods using https://grafana.k8s.chaosgenius.io/
